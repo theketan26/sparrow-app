@@ -69,10 +69,10 @@
       } else {
         pairs = keyValue;
       }
-      let flag: boolean = true;
+      let flag: boolean = false;
       for (let i = 0; i < pairs.length - 1; i++) {
-        if (pairs[i].checked === true) {
-          flag = false;
+        if (pairs[i].checked === false) {
+          flag = true;
         }
       }
       if (mode === "READ" && pairs[pairs.length - 1].checked === false) {
@@ -87,17 +87,13 @@
   }
 
   const updateParam = (index: number): void => {
-    pairs.forEach((elem, i) => {
-      if (i === index) {
-        elem.checked = true;
-      }
-    });
     pairs = pairs;
     if (
       pairs.length - 1 === index &&
       mode === "WRITE" &&
       (pairs[index].key !== "" || pairs[index].value !== "")
     ) {
+      pairs[pairs.length - 1].checked = true;
       pairs.push({
         key: "",
         value: "",
@@ -161,7 +157,6 @@
       callback(pairs);
       updateParam(index);
     }
-    console.log(pairs);
   };
 
   const removeFormFile = (index) => {
