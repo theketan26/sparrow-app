@@ -58,15 +58,15 @@
       on:mouseleave={() => (isHovered = false)}
     >
       <div class="d-flex" style="align-items: center;">
-        {#if isRouteActive && !isHovered}
+        {#if isRouteActive}
           <div
-            style="background-color: var(--nav-bar-active-slash); position:fixed; height: 16px; width: 2px; left:10px"
+            style="background-color: var(--nav-bar-active-slash); position:fixed; height: 38px; width: 2px; left: 5px;"
           ></div>
         {/if}
-        {#if isHovered && item.hoveredLogo && !item.disabled}
-          <img src={item.hoveredLogo} alt={item.heading} />
-        {:else if isRouteActive && item.selectedLogo}
+        {#if isRouteActive && item.selectedLogo}
           <img src={item.selectedLogo} alt={item.heading} />
+        {:else if isHovered && item.hoveredLogo && !item.disabled}
+          <img src={item.hoveredLogo} alt={item.heading} />
         {:else}
           <img src={item.defaultLogo} alt={item.heading} />
         {/if}
@@ -91,7 +91,7 @@
 
   .sidebar-item:hover {
     background-color: var(--nav-bar-hover-background);
-    border-radius: 8px;
+    border-radius: 4px;
     opacity: 0.9;
   }
 

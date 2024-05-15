@@ -105,6 +105,7 @@ class DecodeRequest {
       key: string;
       value: string;
     } = new ReduceAuthParameter(request.state, request.auth).getValue();
+    url = url.trim();
     // Check if authentication header exists
     if (authHeader.key || authHeader.value) {
       let flag: boolean = false;
