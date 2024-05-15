@@ -39,23 +39,23 @@
 </script>
 
 <Tooltip placement="right" title={item.disabled ? "Coming Soon" : item.heading}>
-  <div
-    class="sidebar-item"
-    class:disabled={item.disabled}
-    class:hover={!item.disabled && isHovered}
-    on:mouseenter={() => (isHovered = true)}
-    on:mouseleave={() => (isHovered = false)}
+  <Link
+    to={item.route}
+    getProps={({ isCurrent, isPartiallyCurrent }) => {
+      isRouteActive = isCurrent || isPartiallyCurrent;
+      return {
+        class: `d-flex flex-column text-decoration-none align-items-center justify-content-center ${
+          item.disabled ? "disabled" : ""
+        }`,
+      };
+    }}
   >
-    <Link
-      to={item.route}
-      getProps={({ isCurrent, isPartiallyCurrent }) => {
-        isRouteActive = isCurrent || isPartiallyCurrent;
-        return {
-          class: `d-flex flex-column py-2 text-decoration-none align-items-center ${
-            item.disabled ? "disabled" : ""
-          }`,
-        };
-      }}
+    <div
+      class="sidebar-item"
+      class:disabled={item.disabled}
+      class:hover={!item.disabled && isHovered}
+      on:mouseenter={() => (isHovered = true)}
+      on:mouseleave={() => (isHovered = false)}
     >
       <div class="d-flex" style="align-items: center;">
         {#if isRouteActive && !isHovered}
@@ -71,8 +71,8 @@
           <img src={item.defaultLogo} alt={item.heading} />
         {/if}
       </div>
-    </Link>
-  </div>
+    </div>
+  </Link>
 </Tooltip>
 
 <style>
@@ -83,10 +83,7 @@
 
   .sidebar-item {
     position: relative;
-    padding-left: 12px; /* Initial padding */
-    padding-right: 12px;
-    padding-top: 4px;
-    padding-bottom: 4px;
+    padding: 12px;
     transition:
       background-color 0.55s ease,
       padding 0.55s ease;
@@ -96,10 +93,6 @@
     background-color: var(--nav-bar-hover-background);
     border-radius: 8px;
     opacity: 0.9;
-    padding-left: 12px; /* Adds padding on hover */
-    padding-right: 12px;
-    padding-top: 4px;
-    padding-bottom: 4px;
   }
 
   .sidebar-item :global(.active-link) {
